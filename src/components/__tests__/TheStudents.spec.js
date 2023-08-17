@@ -72,11 +72,11 @@ describe('TheStudents.vue', () => {
     const studentNames = wrapper.findAll('.table-cell-student-name');
     const studentCourses = wrapper.findAll('.table-cell-student-course');
     const studentSubjects = wrapper.findAll('.table-cell-student-subject');
-    const studentScores = wrapper.findAll('.table-cell-student-score'); // Agregado
+    const studentScores = wrapper.findAll('.table-cell-student-score');
   
     expect(studentNames[0].text()).toBe('Bob Johnson');
     expect(studentCourses[0].text()).toBe('A');
-    expect(studentSubjects[0].text()).toBe('Science'); // Agregado
+    expect(studentSubjects[0].text()).toBe('Science');
     expect(studentScores[0].text()).toBe('7');
   });
   

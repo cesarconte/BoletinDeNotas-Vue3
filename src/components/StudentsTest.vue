@@ -1,27 +1,27 @@
 <template>
-    <div class="form">
+    <div class="form" id="students-form">
       <h2>Add Grades</h2>
       <form @submit.prevent="addOrUpdateStudent">
-        <input class="input" v-model="student.name" placeholder="Student First Name" autocomplete="off" />
-        <input class="input" v-model="student.lastName" placeholder="Student Last Name" autocomplete="off" />
-        <input class="input" v-model="student.course" placeholder="Course" autocomplete="off" />
-        <input class="input" v-model="student.subject" placeholder="Subject" autocomplete="off" />
-        <input class="input" v-model.number="student.score" type="number" step="0.1" placeholder="Score" autocomplete="off" />
-        <div class="action-buttons">
-            <button class="button" id="add-grade-button" type="submit">
+        <input class="input" id="student-name-input" v-model="student.name" placeholder="Student First Name" autocomplete="off" />
+        <input class="input" id="student-lastName-input" v-model="student.lastName" placeholder="Student Last Name" autocomplete="off" />
+        <input class="input" id="student-course-input" v-model="student.course" placeholder="Course" autocomplete="off" />
+        <input class="input" id="student-subject-input" v-model="student.subject" placeholder="Subject" autocomplete="off" />
+        <input class="input" id="student-score-input" v-model.number="student.score" type="number" step="0.1" placeholder="Score" autocomplete="off" />
+        <div class="action-buttons" id="action-buttons-id">
+            <button class="btn" id="add-student-btn" type="submit">
                 {{ isEditing ? 'Update' : 'Add Student' }}
             </button>
-            <button class="button" v-if="isEditing" @click="cancelEdit">Cancel</button>
+            <button class="btn" id="cancel-btn" v-if="isEditing" @click="cancelEdit">Cancel</button>
         </div>
       </form>
   
       <form>
-        <input class="input" v-model="filters.lastName" placeholder="Filter by Last Name" />
-        <input class="input" v-model="filters.course" placeholder="Filter by Course" />
-        <input class="input" v-model="filters.subject" placeholder="Filter by Subject" /> 
+        <input class="input" id="lastName-filter" v-model="filters.lastName" placeholder="Filter by Last Name" />
+        <input class="input" id="course-filter" v-model="filters.course" placeholder="Filter by Course" />
+        <input class="input" id="subject-filter" v-model="filters.subject" placeholder="Filter by Subject" /> 
       </form>
   
-      <table class="table" id="grade-table">
+      <table class="table" id="students-table">
         <thead>
           <tr>
             <th class="table-header">Student</th>
@@ -161,7 +161,7 @@
     margin: 10px 10px 10px 0;
   }
 
-  .button {
+  .btn {
     padding: 8px 12px;
     background-color: hsla(160, 100%, 37%, 1);
     color: var(--vt-c-white);

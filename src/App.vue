@@ -1,9 +1,9 @@
 <template>
     <div>
-      <header class="app-header" id="app-header">
+      <header class="app-header" id="app-header-id">
         <h1>School Report Card</h1>
       </header>
-      <main class="app-main" id="app-main">
+      <main class="app-main" id="app-main-id">
         <StudentsTest :initialGrades="grades" />
       </main>
     </div>
