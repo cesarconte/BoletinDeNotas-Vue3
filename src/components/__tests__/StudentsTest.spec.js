@@ -17,7 +17,6 @@ describe('App Component', () => {
       test('the StudentsTest component is present', () => {
         const wrapper = mount(App);
     
-        // Utiliza wrapper.findComponent para buscar un componente hijo
         const studentsTestComponent = wrapper.findComponent({ name: 'StudentsTest' });
         expect(studentsTestComponent.exists()).toBe(true);
       });
