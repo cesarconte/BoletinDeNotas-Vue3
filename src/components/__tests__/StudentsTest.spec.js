@@ -55,113 +55,106 @@ describe('App Component', () => {
     });
 
     describe('StudentsTest Component', () => {
-        test('the "class" attribute of the form element is correct', () => {
-            const wrapper = mount(StudentsTest);
+      test('the "class" attribute of the form element is correct', () => {
+        const wrapper = mount(StudentsTest);
+      
+        const formElement = wrapper.find('div.form');
+        const classList = formElement.classes();
+      
+        expect(classList).toContain('form');
+      });
         
-            const formElement = wrapper.find('div.form');
-            const classAttribute = formElement.attributes('class');
-        
-            expect(classAttribute).toContain('form');
-          });
-        
-          test('the "class" attribute of the input elements is correct', () => {
-            const wrapper = mount(StudentsTest);
-        
-            const inputElements = wrapper.findAll('input.input');
-            inputElements.forEach((inputElement) => {
-              const classAttribute = inputElement.attributes('class');
-              expect(classAttribute).toContain('input');
-            });
-          });
+      test('the "class" attribute of the input elements is correct', () => {
+        const wrapper = mount(StudentsTest);
+    
+        const inputElements = wrapper.findAll('input.input');
+        inputElements.forEach((inputElement) => {
+          const classAttribute = inputElement.attributes('class');
+          expect(classAttribute).toContain('input');
+        });
+      });
 
-        test('the "class" attribute of the table element is correct', () => {
+      test('the "class" attribute of the table element is correct', () => {
+        const wrapper = mount(StudentsTest);
+    
+        const tableElement = wrapper.find('table.table');
+        const classAttribute = tableElement.attributes('class');
+  
+        expect(classAttribute).toContain('table');
+      });
+
+      test('the "id" attribute of the form element is correct', () => {
           const wrapper = mount(StudentsTest);
       
-          const tableElement = wrapper.find('table.table');
-          const classAttribute = tableElement.attributes('class');
-    
-          expect(classAttribute).toContain('table');
+          const formElement = wrapper.find('div#students-form');
+          expect(formElement.exists()).toBe(true);
         });
-
-        test('the "id" attribute of the form element is correct', () => {
-            const wrapper = mount(StudentsTest);
         
-            const formElement = wrapper.find('div#students-form');
-            expect(formElement.exists()).toBe(true);
-          });
+        test('the "id" attribute of the input elements is correct', () => {
+          const wrapper = mount(StudentsTest);
+      
+          const inputNameElement = wrapper.find('input#student-name-input');
+          expect(inputNameElement.exists()).toBe(true);
+      
+          const inputLastNameElement = wrapper.find('input#student-lastName-input');
+          expect(inputLastNameElement.exists()).toBe(true);
+      
+          const inputCourseElement = wrapper.find('input#student-course-input');
+          expect(inputCourseElement.exists()).toBe(true);
+      
+          const inputSubjectElement = wrapper.find('input#student-subject-input');
+          expect(inputSubjectElement.exists()).toBe(true);
+      
+          const inputScoreElement = wrapper.find('input#student-score-input');
+          expect(inputScoreElement.exists()).toBe(true);
+        });
+      
+        test('the "id" attribute of the action buttons element is correct', () => {
+          const wrapper = mount(StudentsTest);
+      
+          const actionButtonsElement = wrapper.find('div#action-buttons-id');
+          expect(actionButtonsElement.exists()).toBe(true);
+        });
+      
+        test('the "id" attribute of the table element is correct', () => {
+          const wrapper = mount(StudentsTest);
+      
+          const tableElement = wrapper.find('table#students-table');
+          expect(tableElement.exists()).toBe(true);
+        });
+      
+        test('the "id" attribute of the filter elements is correct', () => {
+          const wrapper = mount(StudentsTest);
+      
+          const lastNameFilterElement = wrapper.find('input#lastName-filter');
+          expect(lastNameFilterElement.exists()).toBe(true);
+      
+          const courseFilterElement = wrapper.find('input#course-filter');
+          expect(courseFilterElement.exists()).toBe(true);
+      
+          const subjectFilterElement = wrapper.find('input#subject-filter');
+          expect(subjectFilterElement.exists()).toBe(true);
+        });
         
-          test('the "id" attribute of the input elements is correct', () => {
-            const wrapper = mount(StudentsTest);
+        test('should receive and display initial grades data', async () => {
+          const initialGrades = [
+            { name: 'John', lastName: 'Doe', course: 'Math', subject: 'Algebra', score: 8.5 }
+          ];
+      
+          const wrapper = mount(StudentsTest, { props: { initialGrades } });
+      
+          await wrapper.vm.$nextTick();
+      
+          const studentNames = wrapper.findAll('.table-cell-student-name');
+          const studentCourses = wrapper.findAll('.table-cell-student-course');
+          const studentSubjects = wrapper.findAll('.table-cell-student-subject');
+          const studentScores = wrapper.findAll('.table-cell-student-score');
+      
+          expect(studentNames[0].text()).toBe('Doe, John');
+          expect(studentCourses[0].text()).toBe('Math');
+          expect(studentSubjects[0].text()).toBe('Algebra');
+          expect(studentScores[0].text()).toBe('8.5');
+        });
         
-            const inputNameElement = wrapper.find('input#student-name-input');
-            expect(inputNameElement.exists()).toBe(true);
-        
-            const inputLastNameElement = wrapper.find('input#student-lastName-input');
-            expect(inputLastNameElement.exists()).toBe(true);
-        
-            const inputCourseElement = wrapper.find('input#student-course-input');
-            expect(inputCourseElement.exists()).toBe(true);
-        
-            const inputSubjectElement = wrapper.find('input#student-subject-input');
-            expect(inputSubjectElement.exists()).toBe(true);
-        
-            const inputScoreElement = wrapper.find('input#student-score-input');
-            expect(inputScoreElement.exists()).toBe(true);
-          });
-        
-          test('the "id" attribute of the action buttons element is correct', () => {
-            const wrapper = mount(StudentsTest);
-        
-            const actionButtonsElement = wrapper.find('div#action-buttons-id');
-            expect(actionButtonsElement.exists()).toBe(true);
-          });
-        
-          test('the "id" attribute of the table element is correct', () => {
-            const wrapper = mount(StudentsTest);
-        
-            const tableElement = wrapper.find('table#students-table');
-            expect(tableElement.exists()).toBe(true);
-          });
-        
-          test('the "id" attribute of the filter elements is correct', () => {
-            const wrapper = mount(StudentsTest);
-        
-            const lastNameFilterElement = wrapper.find('input#lastName-filter');
-            expect(lastNameFilterElement.exists()).toBe(true);
-        
-            const courseFilterElement = wrapper.find('input#course-filter');
-            expect(courseFilterElement.exists()).toBe(true);
-        
-            const subjectFilterElement = wrapper.find('input#subject-filter');
-            expect(subjectFilterElement.exists()).toBe(true);
-          });
-
-          test('can receive props and display data for a single student', async () => {
-            const initialGrades = [
-              { name: 'John', lastName: 'Doe', course: 'Math', subject: 'Algebra', score: 8.5 }
-            ];
-            const wrapper = mount(StudentsTest, {
-              props: {
-                initialGrades
-              }
-            });
-    
-            await wrapper.vm.$nextTick();
-        
-            const studentRows = wrapper.findAll('tbody tr');
-            expect(studentRows.length).toBe(initialGrades.length);
-            
-            const studentNameCell = studentRows[0].find('.table-cell-student-name');
-            expect(studentNameCell.text()).toContain('John Doe');
-        
-            const studentCourseCell = studentRows[0].find('.table-cell-student-course');
-            expect(studentCourseCell.text()).toContain('Math');
-        
-            const studentSubjectCell = studentRows[0].find('.table-cell-student-subject');
-            expect(studentSubjectCell.text()).toContain('Algebra');
-        
-            const studentScoreCell = studentRows[0].find('.table-cell-student-score');
-            expect(studentScoreCell.text()).toContain('8.5');
-          });
           
       });

@@ -34,10 +34,10 @@
         </thead>
         <tbody>
             <tr v-for="(student, index) in filteredStudents" :key="index">
-              <td class="table-cell table-cell-student-name">{{ student.lastName }}, {{ student.name }}</td>
-              <td class="table-cell table-cell-student-course">{{ student.course }}</td>
-              <td class="table-cell table-cell-student-subject">{{ student.subject }}</td>
-              <td class="table-cell table-cell-student-score">{{ student.score }}</td>
+              <td class="table-cell table-cell-student-name">{{ student.lastName.value }}, {{ student.name.value }}</td>
+              <td class="table-cell table-cell-student-course">{{ student.course.value }}</td>
+              <td class="table-cell table-cell-student-subject">{{ student.subject.value }}</td>
+              <td class="table-cell table-cell-student-score">{{ student.score.value }}</td>
               <td class="table-cell table-cell-grade">{{ getGradeFromScore(student.score) }}</td>
               <td class="table-cell table-cell-actions">
                 <div class="action-buttons">
