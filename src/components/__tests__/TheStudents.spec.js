@@ -50,13 +50,13 @@ describe('TheStudents.vue', () => {
 
   test('should have correct id for button element', () => {
     const wrapper = mount(TheStudents);
-    const buttonElement = wrapper.find('#add-grade-button');
+    const buttonElement = wrapper.find('#add-student-btn');
     expect(buttonElement.exists()).toBe(true);
   });
 
   test('should have correct id for table element', () => {
     const wrapper = mount(TheStudents);
-    const tableElement = wrapper.find('#grade-table');
+    const tableElement = wrapper.find('#students-table');
     expect(tableElement.exists()).toBe(true);
   });
 
@@ -74,32 +74,36 @@ describe('TheStudents.vue', () => {
     const studentSubjects = wrapper.findAll('.table-cell-student-subject');
     const studentScores = wrapper.findAll('.table-cell-student-score');
   
-    expect(studentNames[0].text()).toBe('Bob Johnson');
+    expect(studentNames[0].text()).toBe('Johnson, Bob');
     expect(studentCourses[0].text()).toBe('A');
     expect(studentSubjects[0].text()).toBe('Science');
     expect(studentScores[0].text()).toBe('7');
   });
   
-  test('should filter students by name', async () => {
+  test('should filter students by last name', async () => {
     const initialGrades = [
       { name: 'Alice Smith', course: 'A', subject: 'Math', score: 8 },
-      { name: 'Bob Johnson', course: 'A', subject: 'Science', score: 7 }
-    ];    
+      { name: 'Bob Johnson', course: 'A', subject: 'Science', score: 7 },
+      { name: 'Carol White', course: 'B', subject: 'History', score: 6 },
+    ];
     const wrapper = mount(TheStudents, { props: { initialGrades } });
   
-    const nameFilterInput = wrapper.find('.input[placeholder="Filter by Student Name"]');
-    await nameFilterInput.setValue('Alice');
+    const lastNameFilterInput = wrapper.find('.input[placeholder="Filter by Student Last Name"]');
+    await wrapper.vm.$nextTick();
+    await lastNameFilterInput.setValue('Johnson');
   
     await wrapper.vm.$nextTick();
   
-    expect(wrapper.find('.table-cell-student-name').text()).toBe('Alice Smith');
-    expect(wrapper.find('.table-cell-student-subject').text()).toBe('Math');
+    const filteredStudents = wrapper.findAll('.table-cell-student-name');
+    expect(filteredStudents).toHaveLength(1);
+  
+    expect(filteredStudents[0].text()).toBe('Johnson, Bob');
   });
   
   test('should filter students by subject', async () => {
     const initialGrades = [
-      { name: 'Alice Smith', course: 'A', subject: 'Math',  score: 8 },
-      { name: 'Bob Johnson', course: 'B', subject: 'Science', score: 7 },
+      { name: 'Smith, Alice ', course: 'A', subject: 'Math',  score: 8 },
+      { name: 'Johnson, Bob', course: 'B', subject: 'Science', score: 7 },
     ];
     
     const wrapper = mount(TheStudents, { props: { initialGrades } });
@@ -132,8 +136,8 @@ describe('TheStudents.vue', () => {
     const filteredStudents = wrapper.findAll('.table-cell-student-name');
     expect(filteredStudents).toHaveLength(2);
 
-    expect(filteredStudents[0].text()).toBe('Alice Smith');
-    expect(filteredStudents[1].text()).toBe('Carol White');
+    expect(filteredStudents[0].text()).toBe('Smith, Alice');
+    expect(filteredStudents[1].text()).toBe('White, Carol');
   });
   
 });

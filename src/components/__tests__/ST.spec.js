@@ -55,6 +55,10 @@ describe('App Component', () => {
     });
 
     describe('StudentsTest Component', () => {
+      const initialGrades = [
+        { name: 'Doe, John', course: 'Math', subject: 'Algebra', score: 8.5 }
+      ];
+      
       test('the "class" attribute of the form element is correct', () => {
         const wrapper = mount(StudentsTest);
       
@@ -137,11 +141,7 @@ describe('App Component', () => {
         });
         
         test('should receive and display initial grades data', async () => {
-          const initialGrades = [
-            { name: 'John', lastName: 'Doe', course: 'Math', subject: 'Algebra', score: 8.5 }
-          ];
-      
-          const wrapper = mount(StudentsTest, { props: { initialGrades } });
+          const wrapper = mount(StudentsTest);
       
           await wrapper.vm.$nextTick();
       
